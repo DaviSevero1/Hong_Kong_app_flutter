@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hong_kong_app/app/core/ui/styles/app_styles.dart';
 import 'package:hong_kong_app/app/core/ui/styles/colors_app.dart';
+import 'package:hong_kong_app/app/core/ui/widgets/ecommerce_button.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -16,11 +17,13 @@ class SplashPage extends StatelessWidget {
       body: Column(
         children: [
           Container(),
-          ElevatedButton(
+          EcommerceButton(
+            width: 100,
+            height: 100,
+            label: 'Teste label',
             onPressed: () {},
-            child: Text('Teste'),
           ),
-          TextFormField()
+          TextFormField(),
         ],
       ),
     );
