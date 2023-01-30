@@ -21,7 +21,10 @@ class EcommerceButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(label),
+        child: Text(
+          label,
+          style: TextStyle(color: Colors.black),
+        ),
       ),
     );
   }
