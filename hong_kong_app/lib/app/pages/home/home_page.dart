@@ -8,6 +8,7 @@ import 'package:hong_kong_app/app/pages/home/widgets/ecommerce_product_tile.dart
 import 'package:hong_kong_app/app/pages/home/widgets/home_state.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/ui/base_state/base_state.dart';
 import 'widgets/home_controller.dart';
 //import 'package:hong_kong_app/app/pages/home/widgets/home_controller.dart';
 //import 'package:provider/provider.dart';
@@ -19,13 +20,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with Loader, Messages {
+class _HomePageState extends BaseState<HomePage, HomeController> {
+  
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<HomeController>().loadProducts();
-    });
+  void onReady() {
+      controller.loadProducts();
   }
 
   @override
@@ -35,9 +34,12 @@ class _HomePageState extends State<HomePage> with Loader, Messages {
       body: BlocConsumer<HomeController, HomeState>(
         listener: (context, state) {
           state.status.matchAny(
-            any: () => hideLoader(),
-            loading: () => showLoader(),
-          );
+              any: () => hideLoader(),
+              loading: () => showLoader(),
+              error: () {
+                hideLoader();
+                showError(state.errorMessage ?? 'Erro não informado');
+              });
         },
         buildWhen: (previous, current) => current.status.matchAny(
           any: () => false,
