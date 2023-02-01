@@ -35,7 +35,7 @@ class _ProductDetailPageState
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(widget.product.image),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -43,7 +43,7 @@ class _ProductDetailPageState
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               widget.product.name,
               style: context.textStyles.textExtraBold.copyWith(fontSize: 22),
@@ -54,7 +54,7 @@ class _ProductDetailPageState
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
                 child: Text(widget.product.description),
               ),
@@ -68,7 +68,7 @@ class _ProductDetailPageState
               Container(
                 width: context.percentWidth(.5),
                 height: 68,
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: BlocBuilder<ProductDetailController, int>(
                   builder: (context, amount) {
                     return EcommerceIncrementButton(

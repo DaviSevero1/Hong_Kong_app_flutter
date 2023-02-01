@@ -11,7 +11,7 @@ mixin Loader<T extends StatefulWidget> on State<T> {
           context: context,
           builder: (context) {
             return LoadingAnimationWidget.dotsTriangle(
-                color: Color.fromARGB(255, 158, 102, 17), size: 60);
+                color: Color.fromARGB(255, 255, 2, 2), size: 60);
           });
     }
   }

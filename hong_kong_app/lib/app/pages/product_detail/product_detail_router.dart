@@ -17,7 +17,7 @@ class ProductDetailRouter {
               as Map<String, dynamic>;
 
           return ProductDetailPage(
-            product: args['products'],
+            product: args['product'],
           );
         },
       );

@@ -22,7 +22,4 @@ class CustomDio extends DioForNative {
   CustomDio unauth() {
     return this;
   }
-
-  
-
 }

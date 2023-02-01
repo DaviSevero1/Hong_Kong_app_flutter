@@ -2,7 +2,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:hong_kong_app/app/core/Exceptions/repository_exceptions.dart';
+import 'package:hong_kong_app/app/core/exeptions/repository_exceptions.dart';
 import 'package:hong_kong_app/app/core/rest_client/custom_dio.dart';
 import 'package:hong_kong_app/app/models/product_model.dart';
 
