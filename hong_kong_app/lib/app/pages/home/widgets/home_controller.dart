@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:hong_kong_app/app/dto/order_product_dto.dart';
 import 'package:hong_kong_app/app/pages/home/widgets/home_state.dart';
 import 'package:hong_kong_app/app/repositories/products/products_repository.dart';
 
@@ -25,5 +26,26 @@ class HomeController extends Cubit<HomeState> {
             errorMessage: 'Erro ao buscar produtos'),
       );
     }
+  }
+
+  void addOrUpdateBag(OrderProductDto orderProduct) {
+    final shoppingBag = [...state.shoppingBag];
+    final orderIndex = shoppingBag
+        .indexWhere((orderP) => orderProduct.product == orderProduct.product);
+
+    if (orderIndex > -1) {
+      if (orderProduct.amout == 0) {
+        shoppingBag.removeAt(orderIndex);
+      } else {
+        shoppingBag[orderIndex] = orderProduct;
+      }
+      shoppingBag[orderIndex] = orderProduct;
+    } else {
+      shoppingBag.add(orderProduct);
+    }
+
+    shoppingBag.add(orderProduct);
+
+    emit(state.copyWith(shoppingBag: shoppingBag));
   }
 }
