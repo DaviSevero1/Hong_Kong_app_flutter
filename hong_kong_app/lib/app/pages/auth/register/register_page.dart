@@ -21,32 +21,36 @@ class RegisterPage extends StatelessWidget {
               Text(
                 'Preencha os campos abaixo para criar o seu cadastro',
                 style: context.textStyles.textMedium.copyWith(
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               ),
               const SizedBox(
                 height: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Nome'),
+                decoration: InputDecoration(
+                    labelText: 'Nome', fillColor: Colors.black12),
               ),
               const SizedBox(
                 height: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'E-mail'),
+                decoration: InputDecoration(
+                    labelText: 'E-mail', fillColor: Colors.black12),
               ),
               const SizedBox(
                 height: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Senha'),
+                decoration: InputDecoration(
+                    labelText: 'Senha', fillColor: Colors.black12),
               ),
               const SizedBox(
                 height: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Confrime Sua Senha'),
+                decoration: InputDecoration(
+                    labelText: 'Confrime Sua Senha', fillColor: Colors.black12),
               ),
               const SizedBox(
                 height: 30,

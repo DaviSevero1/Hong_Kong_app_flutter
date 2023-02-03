@@ -27,13 +27,13 @@ class LoginPage extends StatelessWidget {
                       height: 30,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'E-mail'),
+                      decoration: InputDecoration(labelText: 'E-mail', fillColor: Colors.black12),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Senha'),
+                      decoration: const InputDecoration(labelText: 'Senha', fillColor: Colors.black12),
                     ),
                     const SizedBox(
                       height: 50,
