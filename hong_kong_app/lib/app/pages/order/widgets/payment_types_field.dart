@@ -7,7 +7,17 @@ import '../../../models/payment_type_model.dart';
 
 class PaymentTypesField extends StatelessWidget {
   final List<PaymentTypeModel> paymentTypes;
-  const PaymentTypesField({super.key, required this.paymentTypes});
+  final ValueChanged<int> valueChanged;
+  final bool valid;
+  final String valueSelected;
+
+  const PaymentTypesField({
+    super.key,
+    required this.paymentTypes,
+    required this.valueChanged,
+    required this.valid,
+    required this.valueSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +32,11 @@ class PaymentTypesField extends StatelessWidget {
           ),
           SmartSelect.single(
             title: '',
-            selectedValue: '',
+            selectedValue: valueSelected,
             modalType: S2ModalType.bottomSheet,
-            onChange: (value) {},
+            onChange: (selected) {
+              valueChanged(int.parse(selected.value));
+            },
             tileBuilder: (context, state) {
               return InkWell(
                 onTap: state.showModal,
@@ -45,6 +57,23 @@ class PaymentTypesField extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Visibility(
+                      visible: !valid,
+                      child: const Divider(
+                        color: Colors.red,
+                      ),
+                    ),
+                    Visibility(
+                      visible: !valid,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Seleciobne uma forma de pagamento',
+                          style: context.textStyles.textRegular
+                              .copyWith(fontSize: 13, color: Colors.red),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -52,9 +81,7 @@ class PaymentTypesField extends StatelessWidget {
             choiceItems: S2Choice.listFrom(
               source: paymentTypes
                   .map((p) => {'value': p.id.toString(), 'title': p.name})
-                  .toList()
-
-              ,
+                  .toList(),
               title: (index, item) => item['title'] ?? '',
               value: (index, item) => item['value'] ?? '',
               group: (index, item) => 'Selecione uma forma de pagamento',

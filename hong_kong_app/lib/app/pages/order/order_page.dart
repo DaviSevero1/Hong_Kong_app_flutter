@@ -23,6 +23,12 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends BaseState<OrderPage, OrderController> {
+  final formKey = GlobalKey<FormState>();
+  final addressEC = TextEditingController();
+  final documentEC = TextEditingController();
+  int? paymentTypeId;
+  final paymentTypeValid = ValueNotifier<bool>(true);
+
   @override
   void onReady() {
     final products =
@@ -44,115 +50,142 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
       },
       child: Scaffold(
         appBar: EcommerceAppBar(),
-        body: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(children: [
-                  Text(
-                    'Carrinho',
-                    style: context.textStyles.textTitle,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Image.asset('assets/images/trashRegular.png'),
-                  ),
-                ]),
+        body: Form(
+          key: formKey,
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(children: [
+                    Text(
+                      'Carrinho',
+                      style: context.textStyles.textTitle,
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Image.asset('assets/images/trashRegular.png'),
+                    ),
+                  ]),
+                ),
               ),
-            ),
-            BlocSelector<OrderController, OrderState, List<OrderProductDto>>(
-              selector: (state) => state.orderProducts,
-              builder: (context, orderProducts) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: orderProducts.length,
-                    (context, index) {
-                      final orderProduct = orderProducts[index];
-                      return Column(
-                        children: [
-                          OrderProductTile(
-                              index: index, orderProduct: orderProduct),
-                          Text('Produto $index'),
-                          const Divider(
-                            color: Colors.grey,
-                          )
-                        ],
+              BlocSelector<OrderController, OrderState, List<OrderProductDto>>(
+                selector: (state) => state.orderProducts,
+                builder: (context, orderProducts) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: orderProducts.length,
+                      (context, index) {
+                        final orderProduct = orderProducts[index];
+                        return Column(
+                          children: [
+                            OrderProductTile(
+                                index: index, orderProduct: orderProduct),
+                            Text('Produto $index'),
+                            const Divider(
+                              color: Colors.grey,
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+              SliverToBoxAdapter(
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total do pedido',
+                          style: context.textStyles.textExtraBold
+                              .copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          '100',
+                          style: context.textStyles.textExtraBold
+                              .copyWith(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  OrderField(
+                    title: 'Endereço de Entrega',
+                    controller: addressEC,
+                    validator: Validatorless.required('Endereço obrigatório'),
+                    hintText: 'Digite um endereço',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  OrderField(
+                    title: 'CPF',
+                    controller: documentEC,
+                    validator: Validatorless.required('CPF Obrigatório'),
+                    hintText: 'Digite o CPF',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  BlocSelector<OrderController, OrderState,
+                      List<PaymentTypeModel>>(
+                    selector: (state) => state.paymentTypes,
+                    builder: (context, paymentTypes) {
+                      return ValueListenableBuilder(
+                        valueListenable: paymentTypeValid,
+                        builder: (_, paymentTypeValidValue, child) {
+                          return PaymentTypesField(
+                            paymentTypes: paymentTypes,
+                            valueChanged: (value) {
+                              paymentTypeId = value;
+                            },
+                            valid: paymentTypeValidValue,
+                            valueSelected: paymentTypeId.toString(),
+                          );
+                          ;
+                        },
                       );
                     },
                   ),
-                );
-              },
-            ),
-            SliverToBoxAdapter(
-              child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total do pedido',
-                        style: context.textStyles.textExtraBold
-                            .copyWith(fontSize: 16),
-                      ),
-                      Text(
-                        '100',
-                        style: context.textStyles.textExtraBold
-                            .copyWith(fontSize: 16),
-                      ),
-                    ],
+                ]),
+              ),
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child:
+                    Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 2,
                   ),
-                ),
-                const Divider(
-                  color: Colors.grey,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                OrderField(
-                  title: 'Endereço de Entrega',
-                  controller: TextEditingController(),
-                  validator: Validatorless.required('m'),
-                  hintText: 'Digite um endereço',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                OrderField(
-                  title: 'CPF',
-                  controller: TextEditingController(),
-                  validator: Validatorless.required('m'),
-                  hintText: 'Digite o CPF',
-                ),
-                BlocSelector<OrderController, OrderState, List<PaymentTypeModel>>(
-                  selector: (state) => state.paymentTypes,
-                  builder: (context, paymentTypes) {
-                    return PaymentTypesField(paymentTypes: paymentTypes,);
-                  },
-                ),
-              ]),
-            ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                const Divider(
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: EcommerceButton(
-                      width: double.infinity,
-                      height: 45,
-                      label: 'Finalizar',
-                      onPressed: () {}),
-                )
-              ]),
-            )
-          ],
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: EcommerceButton(
+                        width: double.infinity,
+                        height: 45,
+                        label: 'Finalizar',
+                        onPressed: () {
+                          final valid =
+                              formKey.currentState?.validate() ?? false;
+                          final PaymentTypeSelected = paymentTypeId != null;
+                          paymentTypeValid.value = PaymentTypeSelected;
+
+                          if (valid) {}
+                        }),
+                  )
+                ]),
+              )
+            ],
+          ),
         ),
       ),
     );
