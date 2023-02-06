@@ -8,17 +8,26 @@ class EcommerceIncrementButton extends StatelessWidget {
   final int amout;
   final VoidCallback incrementTap;
   final VoidCallback decrementTap;
+  final bool _compact;
 
   const EcommerceIncrementButton({
     super.key,
     required this.amout,
     required this.incrementTap,
     required this.decrementTap,
-  });
+  }) : _compact = false;
+
+  const EcommerceIncrementButton.compact({
+    super.key,
+    required this.amout,
+    required this.incrementTap,
+    required this.decrementTap,
+  }) : _compact = true;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: _compact ? EdgeInsets.all(7) : null,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(7),
@@ -31,14 +40,14 @@ class EcommerceIncrementButton extends StatelessWidget {
             child: Text(
               '-',
               style: context.textStyles.textMedium
-                  .copyWith(fontSize: 22, color: Colors.grey),
+                  .copyWith(fontSize: _compact ? 10 : 22, color: Colors.grey),
             ),
           ),
         ),
         Text(
           amout.toString(),
           style: context.textStyles.textRegular.copyWith(
-            fontSize: 17,
+            fontSize: _compact ? 10 : 17,
             color: context.colors.secondary,
           ),
         ),
@@ -49,7 +58,7 @@ class EcommerceIncrementButton extends StatelessWidget {
             child: Text(
               '+',
               style: context.textStyles.textMedium
-                  .copyWith(fontSize: 22, color: Colors.grey),
+                  .copyWith(fontSize: _compact ? 10 : 22, color: Colors.grey),
             ),
           ),
         ),

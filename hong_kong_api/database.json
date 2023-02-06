@@ -1,6 +1,25 @@
 {
-    "users": [],
-    "payment-types":[
+    "users": [
+        {
+            "id": 1,
+            "name": "Davi Severo",
+            "email": "sever@gmail.com",
+            "password": "adbconnect"
+        },
+        {
+            "id": 2,
+            "name": "Davi",
+            "email": "teste@teste.com",
+            "password": "testeteste"
+        },
+        {
+            "id": 3,
+            "name": "davi",
+            "email": "davi@gmail.com",
+            "password": "testeteste"
+        }
+    ],
+    "payment-types": [
         {
             "id": 1,
             "name": "Cartão de Crédito",
@@ -8,7 +27,7 @@
             "enabled": true
         },
         {
-            "id":2,
+            "id": 2,
             "name": "Cartão de Débito",
             "acronym": "CD",
             "enabled": true
@@ -46,7 +65,7 @@
             "name": "Santo Antônio",
             "description": "Acessório de caminhonete para a segurança de transporte de objetos",
             "price": 1399.0,
-            "image":"https://www.pickupville.com.br/wp-content/uploads/2021/03/1-3.jpg"
+            "image": "https://www.pickupville.com.br/wp-content/uploads/2021/03/1-3.jpg"
         },
         {
             "id": 4,

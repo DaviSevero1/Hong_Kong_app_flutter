@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hong_kong_app/app/core/rest_client/custom_dio.dart';
+import 'package:hong_kong_app/app/repositories/products/auth/auth_repository.dart';
+import 'package:hong_kong_app/app/repositories/products/auth/auth_repository_impl.dart';
 //import 'package:hong_kong_app/app/core/rest_client/custom_dio.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,12 @@ class AplicationBinding extends StatelessWidget {
       providers: [
         Provider(
           create: (context) => CustomDio(),
-        )
+        ),
+        Provider<AuthRepository>(
+          create: (context) => AuthRepositoryImpl(
+            dio: context.read(),
+          ),
+        ),
       ],
       child: child,
     );

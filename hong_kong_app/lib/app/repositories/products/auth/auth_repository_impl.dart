@@ -6,6 +6,8 @@ import 'package:hong_kong_app/app/core/rest_client/custom_dio.dart';
 import 'package:hong_kong_app/app/models/auth_model.dart';
 import 'package:hong_kong_app/app/repositories/products/auth/auth_repository.dart';
 
+import '../../../core/exeptions/unauthorized_exception.dart';
+
 class AuthRepositoryImpl implements AuthRepository {
   final CustomDio dio;
 
@@ -13,15 +15,23 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<AuthModel> login(String email, String password) async {
-   
-   final result = await dio.unauth().post('/auth', data: {
-    'email': email,
-    'password': password,
-    
-   });
+    try {
+      final result = await dio.unauth().post('/auth', data: {
+        'email': email,
+        'password': password,
+      });
 
-   return AuthModel.fromMap(map)
-   
+      return AuthModel.fromMap(result.data);
+    } on DioError catch (e, s) {
+      if (e.response?.statusCode == 403) {
+        log('Permissão Negada');
+        throw UnauthorizedException();
+      }
+
+      log('Erro ao realizar login', error: e, stackTrace: s);
+
+      throw RepositoryExceptions(message: 'Erro ao realizar login');
+    }
   }
 
   @override
