@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hong_kong_app/app/core/extensions/formater_extensions.dart';
 import 'package:hong_kong_app/app/core/ui/helpers/size_extensions.dart';
 import 'package:hong_kong_app/app/core/ui/styles/text_styles.dart';
 import 'package:hong_kong_app/app/dto/order_product_dto.dart';
+import 'package:hong_kong_app/app/pages/home/widgets/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShoppingBagWidget extends StatelessWidget {
@@ -12,8 +14,8 @@ class ShoppingBagWidget extends StatelessWidget {
 
   Future<void> _goOrder(BuildContext context) async {
     final navigator = Navigator.of(context);
+    final controller = context.read<HomeController>();
     final sp = await SharedPreferences.getInstance();
-    sp.clear();
 
     if (!sp.containsKey('accessToken')) {
       final loginResult = await navigator.pushNamed('/auth/login');
@@ -23,7 +25,8 @@ class ShoppingBagWidget extends StatelessWidget {
       }
     }
 
-    await navigator.pushNamed('/orde', arguments: bag);
+    final updateBag = await navigator.pushNamed('/orde', arguments: bag);
+    controller.updateBag(updateBag as List<OrderProductDto>);
   }
 
   @override

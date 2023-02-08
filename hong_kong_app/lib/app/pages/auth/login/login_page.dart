@@ -84,6 +84,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                         height: 30,
                       ),
                       TextFormField(
+                        obscureText: true,
                         decoration: const InputDecoration(
                           labelText: 'Senha',
                           fillColor: Colors.black12,

@@ -7,6 +7,8 @@ import 'package:hong_kong_app/app/core/ui/widgets/ecommerce_button.dart';
 import 'package:hong_kong_app/app/core/ui/widgets/ecommerce_increment_button.dart';
 
 import 'package:hong_kong_app/app/dto/order_product_dto.dart';
+import 'package:hong_kong_app/app/pages/order/order_controller.dart';
+import 'package:provider/provider.dart';
 
 class OrderProductTile extends StatelessWidget {
   final int index;
@@ -46,12 +48,22 @@ class OrderProductTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        (orderProduct.amout* product.price).currencyPTBR,
+                        (orderProduct.amout * product.price).currencyPTBR,
                         style: context.textStyles.textMedium.copyWith(
                             fontSize: 14, color: context.colors.secondary),
                       ),
                       EcommerceIncrementButton.compact(
-                          amout: 1, incrementTap: () {}, decrementTap: () {})
+                          amout: orderProduct.amout,
+                          incrementTap: () {
+                            context
+                                .read<OrderController>()
+                                .incrementProduct(index);
+                          },
+                          decrementTap: () {
+                            context
+                                .read<OrderController>()
+                                .decrementProduct(index);
+                          })
                     ],
                   )
                 ],
