@@ -89,10 +89,9 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
               _showConfirmProductDialog(state);
             }
           },
-          emptyBag: (){
-            
-          },
-          
+          // emptyBag: (){
+
+          // },
         );
       },
       child: WillPopScope(
@@ -135,7 +134,6 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                             children: [
                               OrderProductTile(
                                   index: index, orderProduct: orderProduct),
-                              Text('Produto $index'),
                               const Divider(
                                 color: Colors.grey,
                               )
@@ -162,7 +160,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                             selector: (state) => state.totalOrder,
                             builder: (context, totalOrder) {
                               return Text(
-                                '100',
+                                totalOrder.toString(),
                                 style: context.textStyles.textExtraBold
                                     .copyWith(fontSize: 16),
                               );

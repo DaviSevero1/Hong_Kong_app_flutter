@@ -5,7 +5,7 @@ import 'package:match/match.dart';
 import 'package:hong_kong_app/app/dto/order_product_dto.dart';
 import 'package:hong_kong_app/app/models/payment_type_model.dart';
 
-part 'widgets/order_state.g.dart';
+part 'order_state.g.dart';
 
 @match
 enum OrderStatus {

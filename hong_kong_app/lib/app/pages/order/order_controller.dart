@@ -24,7 +24,7 @@ class OrderController extends Cubit<OrderState> {
     } catch (e, s) {
       log('Erro ao carregar página', error: e, stackTrace: s);
       emit(state.copyWith(
-          status: OrderStatus.error, errorMessage: 'Erri ao carregar página'));
+          status: OrderStatus.error, errorMessage: 'Erro ao carregar página'));
     }
   }
 

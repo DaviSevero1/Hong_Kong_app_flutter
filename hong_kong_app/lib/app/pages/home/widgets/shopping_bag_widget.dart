@@ -25,7 +25,7 @@ class ShoppingBagWidget extends StatelessWidget {
       }
     }
 
-    final updateBag = await navigator.pushNamed('/orde', arguments: bag);
+    final updateBag = await navigator.pushNamed('/order', arguments: bag);
     controller.updateBag(updateBag as List<OrderProductDto>);
   }
 
@@ -34,7 +34,7 @@ class ShoppingBagWidget extends StatelessWidget {
     var totalBag = bag
         .fold<double>(
           0.0,
-          (total, element) => total += element.totalPrice,
+          (total, element) => (total += element.totalPrice),
         )
         .currencyPTBR;
 

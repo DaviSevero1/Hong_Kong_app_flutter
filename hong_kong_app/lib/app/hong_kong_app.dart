@@ -25,10 +25,10 @@ class HongKongApp extends StatelessWidget {
         routes: {
           '/': (context) => const SplashPage(),
           '/home': (context) => HomeRouter.page,
-          '/productDetail': (context) => ProductDetailRouter.page,
+          '/productDetail': (context) => ProductDetailRouter.page,  
           '/auth/login': (context) => LoginRouter.page,
           '/auth/register': (context) =>  RegisterRoute.page,
-          '/orde':(context) => OrderRouter.page,
+          '/order':(context) => OrderRouter.page,
         },
       ),
     );
