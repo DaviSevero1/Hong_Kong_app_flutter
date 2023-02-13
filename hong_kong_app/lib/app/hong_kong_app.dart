@@ -6,6 +6,7 @@ import 'package:hong_kong_app/app/pages/auth/login/login_router.dart';
 import 'package:hong_kong_app/app/pages/auth/register/register_page.dart';
 import 'package:hong_kong_app/app/pages/auth/register/register_route.dart';
 import 'package:hong_kong_app/app/pages/home/home_router.dart';
+import 'package:hong_kong_app/app/pages/order/order_completed_page.dart';
 import 'package:hong_kong_app/app/pages/order/order_page.dart';
 import 'package:hong_kong_app/app/pages/order/order_router.dart';
 //import 'package:hong_kong_app/app/pages/product_detail/product_detail_page.dart';
@@ -25,10 +26,11 @@ class HongKongApp extends StatelessWidget {
         routes: {
           '/': (context) => const SplashPage(),
           '/home': (context) => HomeRouter.page,
-          '/productDetail': (context) => ProductDetailRouter.page,  
+          '/productDetail': (context) => ProductDetailRouter.page,
           '/auth/login': (context) => LoginRouter.page,
-          '/auth/register': (context) =>  RegisterRoute.page,
-          '/order':(context) => OrderRouter.page,
+          '/auth/register': (context) => RegisterRoute.page,
+          '/order': (context) => OrderRouter.page,
+          '/order/completed': (context) => const OrderCompletedPage(),
         },
       ),
     );
