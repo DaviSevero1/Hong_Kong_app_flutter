@@ -26,12 +26,10 @@ class SplashPage extends StatelessWidget {
                   Image.asset(
                     'assets/images/logo.png',
                   ),
-                  const SizedBox(
-                    height: 90,
-                  ),
                   const Text(
                     'A casa da Pick-Up',
-                    style: TextStyle(color: Color.fromARGB(255, 206, 189, 139)),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 211, 80), fontSize: 14),
                   ),
                   const SizedBox(
                     height: 200,

@@ -107,13 +107,13 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
                     ),
                     TextFormField(
                         decoration: const InputDecoration(
-                            labelText: 'Confrime Sua Senha',
+                            labelText: 'Confirme Sua Senha',
                             fillColor: Colors.black12),
                         obscureText: true,
                         validator: Validatorless.multiple([
                           Validatorless.required('Confirme sua Senha'),
                           Validatorless.compare(
-                              _passworEC, 'Senha diferente de confirma Senha')
+                              _passworEC, 'As senhas estão diferentes')
                         ])),
                     const SizedBox(
                       height: 30,

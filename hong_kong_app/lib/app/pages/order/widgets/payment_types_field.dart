@@ -68,7 +68,7 @@ class PaymentTypesField extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          'Seleciobne uma forma de pagamento',
+                          'Selecione uma forma de pagamento',
                           style: context.textStyles.textRegular
                               .copyWith(fontSize: 13, color: Colors.red),
                         ),

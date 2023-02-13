@@ -5,8 +5,8 @@ class EcommerceAppBar extends AppBar {
       : super(
           elevation: elevation,
           title: Image.asset(
-            'assets/images/logo.png',
-            width: 80,
+            'assets/images/logoappbar.png',
+            width: 200,
           ),
         );
 }
